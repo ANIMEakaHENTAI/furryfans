@@ -22,13 +22,13 @@ use javafxTest;
 -- Table `mydb`.`client`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `javafxTest`.`client` (
-  `id_client` INT NOT NULL,
-  ` surname` VARCHAR(45) NULL,
-  ` name` VARCHAR(45) NULL,
-  ` telefon` INT NULL,
-  `city` VARCHAR(45) NULL,
-  `address` VARCHAR(45) NULL,
-  `e-mail` VARCHAR(45) NULL,
+  `Id_client` INT NOT NULL,
+  `Surname` VARCHAR(45) NULL,
+  `Name` VARCHAR(45) NULL,
+  `Telefon` INT NULL,
+  `City` VARCHAR(45) NULL,
+  `Address` VARCHAR(45) NULL,
+  `E-mail` VARCHAR(45) NULL,
   PRIMARY KEY (`id_client`))
 ENGINE = InnoDB;
 
