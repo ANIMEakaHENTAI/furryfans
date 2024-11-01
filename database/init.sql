@@ -21,32 +21,35 @@ use javafxTest;
 -- -----------------------------------------------------
 -- Table `mydb`.`client`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`gym` (
-  `id_gym` INT NOT NULL,
-  ` name` VARCHAR(55) NOT NULL,
-  ` adress` VARCHAR(55) NOT NULL,
-  `subscription_count` INT NULL,
-  PRIMARY KEY (`id_gym`))
+CREATE TABLE IF NOT EXISTS `javafxTest`.`client` (
+  `id_client` INT NOT NULL,
+  ` surname` VARCHAR(45) NULL,
+  ` name` VARCHAR(45) NULL,
+  ` telefon` INT NULL,
+  `city` VARCHAR(45) NULL,
+  `address` VARCHAR(45) NULL,
+  `e-mail` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_client`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`oplata`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`trainer` (
-  `id_trainer` INT NOT NULL,
-  ` surname` VARCHAR(55) NOT NULL,
-  `name` VARCHAR(55) NOT NULL,
-  `salary` INT NOT NULL,
-  PRIMARY KEY (`id_trainer`))
+CREATE TABLE IF NOT EXISTS `javafxTest`.`oplata` (
+  `id` INT NOT NULL,
+  ` №_zakaza` INT NULL,
+  `summa_oplaty` INT NOT NULL,
+  `pometka_ob_oplate` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`zakaz`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`client` (
-  `id_client` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `javafxTest`.`zakaz` (
+  `№_zakaza` INT NOT NULL,
   ` id_client` INT NULL,
   ` data` DATE NULL,
   `summa_oplata` INT NULL,
@@ -62,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`client` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_zakaz_oplata1`
     FOREIGN KEY (`oplata_kod`)
-    REFERENCES `mydb`.`oplata` (`kod`)
+    REFERENCES `javafxTest`.`oplata` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -71,32 +74,32 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`proizvoditel`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`proizvoditel` (
-  `kod_proizvoditel` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `javafxTest`.`proizvoditel` (
+  `id_proizvoditel` INT NOT NULL,
   ` proizvoditel` VARCHAR(45) NULL,
   ` telefon` INT NULL,
   ` city` VARCHAR(45) NULL,
   `address` VARCHAR(45) NULL,
   `e-mail` VARCHAR(45) NULL,
-  PRIMARY KEY (`kod_proizvoditel`))
+  PRIMARY KEY (`id_proizvoditel`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.` tovar`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.` tovar` (
-  `kod_tovara` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `javafxTest`.` tovar` (
+  `id_tovara` INT NOT NULL,
   `proizvoditel` VARCHAR(45) NULL,
   ` name` VARCHAR(45) NULL,
   `tsena` INT NULL,
   `kolichestvo_tovara` VARCHAR(45) NULL,
-  `proizvoditel_kod_proizvoditel` INT NOT NULL,
-  PRIMARY KEY (`kod_tovara`),
-  INDEX `fk_ tovar_proizvoditel1_idx` (`proizvoditel_kod_proizvoditel` ASC) VISIBLE,
+  `proizvoditel_id_proizvoditel` INT NOT NULL,
+  PRIMARY KEY (`id_tovara`),
+  INDEX `fk_ tovar_proizvoditel1_idx` (`proizvoditel_id_proizvoditel` ASC) VISIBLE,
   CONSTRAINT `fk_ tovar_proizvoditel1`
-    FOREIGN KEY (`proizvoditel_kod_proizvoditel`)
-    REFERENCES `mydb`.`proizvoditel` (`kod_proizvoditel`)
+    FOREIGN KEY (`proizvoditel_id_proizvoditel`)
+    REFERENCES `mydb`.`proizvoditel` (`id_proizvoditel`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -105,24 +108,24 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`detali_zakaza`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`detali_zakaza` (
-  `kod` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `javafxTest`.`detali_zakaza` (
+  `id` INT NOT NULL,
   ` №_zakaza` INT NULL,
-  `kod_tovara` INT NULL,
+  `id_tovara` INT NULL,
   `kolichestvo_tovara` INT NULL,
   `zakaz_№_zakaza` INT NOT NULL,
-  ` tovar_kod_tovara` INT NOT NULL,
-  PRIMARY KEY (`kod`),
+  ` tovar_id_tovara` INT NOT NULL,
+  PRIMARY KEY (`id`),
   INDEX `fk_detali_zakaza_zakaz1_idx` (`zakaz_№_zakaza` ASC) VISIBLE,
-  INDEX `fk_detali_zakaza_ tovar1_idx` (` tovar_kod_tovara` ASC) VISIBLE,
+  INDEX `fk_detali_zakaza_ tovar1_idx` (` tovar_id_tovara` ASC) VISIBLE,
   CONSTRAINT `fk_detali_zakaza_zakaz1`
     FOREIGN KEY (`zakaz_№_zakaza`)
-    REFERENCES `mydb`.`zakaz` (`№_zakaza`)
+    REFERENCES `javafxTest`.`zakaz` (`№_zakaza`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_detali_zakaza_ tovar1`
-    FOREIGN KEY (` tovar_kod_tovara`)
-    REFERENCES `mydb`.` tovar` (`kod_tovara`)
+    FOREIGN KEY (` tovar_id_tovara`)
+    REFERENCES `javafxTest`.` tovar` (`id_tovara`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
